@@ -1,12 +1,14 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const userRoute = require("./routes/contact.route");
 require("dotenv").config();
 const app = express();
 
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(userRoute);
-const { PORT } = process.env;
+const { PORT, URI_CONNECTION_STRING } = process.env;
 
 // home route
 app.get("/", (req, res) => {
@@ -22,6 +24,14 @@ app.use((req, res, err) => {
 });
 
 // listening port
-app.listen(PORT || 3000, () => {
-	console.log(`Server running at http://localhost:${PORT}`);
-});
+mongoose
+	.connect(URI_CONNECTION_STRING, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => {
+		app.listen(PORT || 3000, () => {
+			console.log(`Server running at http://localhost:${PORT}`);
+		});
+	})
+	.catch((err) => console.log("Main Error: " + err));
