@@ -3,7 +3,7 @@ const Contact = require("../models/contacts");
 exports.showContact = (req, res) => {
 	Contact.find()
 		.then((contacts) => {
-			res.render("index", { contacts, error: {} });
+			res.render("index", { contacts, error: {}, title: "Contacts" });
 		})
 		.catch((err) => {
 			res.json(err);
@@ -28,7 +28,7 @@ exports.postContact = (req, res) => {
 		console.log("what error");
 		Contact.find()
 			.then((contacts) => {
-				res.render("index", { contacts, error });
+				res.render("index", { contacts, error, title: "Contacts" });
 			})
 			.catch((err) => {
 				res.json(err);
@@ -64,7 +64,7 @@ exports.postContact = (req, res) => {
 				.then(() => {
 					Contact.find()
 						.then((contacts) => {
-							res.render("index", { contacts, error: {} });
+							res.render("index", { contacts, error: {}, title: "Contacts" });
 						})
 						.catch((err) => {
 							res.json(err);

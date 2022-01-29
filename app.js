@@ -14,7 +14,7 @@ const { PORT, URI_CONNECTION_STRING } = process.env;
 
 // home route
 app.get("/", (req, res) => {
-	res.render("home")
+	res.render("home",{title: "Home"})
 });
 
 // not found page
