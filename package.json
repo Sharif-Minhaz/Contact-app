@@ -2,14 +2,14 @@
   "name": "dive_into_node.js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "prod": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "sharif md. minhaz",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^14.3.2",
