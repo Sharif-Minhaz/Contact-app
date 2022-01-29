@@ -1,0 +1,92 @@
+<%- include("./templates/head.ejs") %> 
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+			integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../css/style.min.css" />
+	</head>
+	<body>
+		<main>
+			<div class="container">
+				<div class="py-4">
+					<h4><i class="fas fa-user-plus pr-2"></i>Add Contact</h4>
+					<form action="/contacts" class="form-inline" id="contact-form" method="post">
+						<div class="form-group me-3">
+							<input type="text" name="name" class="form-control <%= error.name? "is-invalid": "" %> " id="formGroupExampleInput"
+							placeholder="Enter full name" />
+							<div class="invalid-feedback"><%= error.name %></div>
+						</div>
+						<div class="form-group me-3">
+							<input type="text" name="phone" class="form-control <%= error.phone? "is-invalid": "" %> " id="formGroupExampleInput2"
+							placeholder="Enter phone number" />
+							<div class="invalid-feedback"><%= error.phone %></div>
+						</div>
+						<div class="form-group me-3">
+							<input type="email" name="email" class="form-control <%= error.email? "is-invalid": "" %> " id="formGroupExampleInput2"
+							placeholder="Enter Email address" />
+							<div class="invalid-feedback"><%= error.email %></div>
+						</div>
+						<div class="form-group">
+							<input type="hidden" name="id" value="" />
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-success sub-btn">Submit<i class="fas fa-plus-square pl-2"></i> </button>
+						</div>
+						<div class="form-group">
+							<button id="reset-btn" type="reset" class="btn btn-primary d-none">Reset<i class="fas fa-sync-alt pl-2"></i></button>
+						</div>
+					</form>
+				</div>
+				<div class="pt-4 form-container">
+					<h4><i class="fas fa-address-book pr-2"></i>Your Contacts</h4>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col"><i class="fas fa-list-ol pr-2"></i>No.</th>
+								<th scope="col"><i class="fas fa-user pr-2"></i>Name</th>
+								<th scope="col"><i class="fas fa-phone pr-2"></i>Phone</th>
+								<th scope="col"><i class="fas fa-envelope pr-2"></i>Email</th>
+								<th scope="col"><i class="fas fa-cog pr-2"></i>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% let i = 0; %> <% for (const contact of contacts) { %> <% i++ %>
+							<tr>
+								<th scope="row"><%= i %></th>
+								<td><%= contact.name %></td>
+								<td><%= contact.phone %></td>
+								<td><%= contact.email %></td>
+								<td>
+									<button
+										class="btn btn-warning btn-sm edit-btn"
+										data-name="<%= contact.name %>"
+										data-phone="<%= contact.phone %>"
+										data-email="<%= contact.email %>"
+										data-id="<%= contact._id %> "
+									>
+										Edit<i class="fas fa-pencil-alt pl-2"></i>
+									</button>
+									<a href="/contacts/delete/<%= contact._id %>" class="btn btn-danger btn-sm">Delete<i class="far fa-trash-alt pl-2"></i></a>
+								</td>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+			integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+			crossorigin="anonymous"
+		></script>
+
+<%- include("./templates/bottom.ejs") %> 

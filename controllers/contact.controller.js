@@ -1,9 +1,9 @@
 const Contact = require("../models/contacts");
 
 exports.showContact = (req, res) => {
-	Contact.find({})
+	Contact.find()
 		.then((contacts) => {
-			res.json(contacts);
+			res.render("index", { contacts, error: {} });
 		})
 		.catch((err) => {
 			res.json(err);
@@ -11,60 +11,77 @@ exports.showContact = (req, res) => {
 };
 
 exports.postContact = (req, res) => {
-	let { name, phone, email } = req.body;
-	let contact = new Contact({
-		name,
-		phone,
-		email,
-	});
-	contact
-		.save()
-		.then((data) => {
-			res.json(data);
-		})
-		.catch((err) => {
-			res.json(err);
-		});
-};
+	let { name, phone, email, id } = req.body;
+	let error = {};
+	if (!name) {
+		error.name = "Please provide your Name";
+	}
+	if (!phone) {
+		error.phone = "Please provide your Phone";
+	}
+	if (!email) {
+		error.email = "Please provide your Email";
+	}
+	let isError = Object.keys(error).length > 0;
 
-exports.getOneContact = (req, res) => {
-	let { id } = req.params;
-	Contact.findById(id)
-		.then((contact) => {
-			res.json(contact);
-		})
-		.catch((err) => {
-			res.json(err);
-		});
-};
-
-exports.putContact = (req, res) => {
-	let { id } = req.params;
-	let { name, phone, email } = req.body;
-	Contact.findOneAndUpdate(
-		{ _id: id },
-		{
-			$set: {
+	if (isError) {
+		console.log("what error");
+		Contact.find()
+			.then((contacts) => {
+				res.render("index", { contacts, error });
+			})
+			.catch((err) => {
+				res.json(err);
+			});
+	} else {
+		if (id) {
+			Contact.findOneAndUpdate(
+				{ _id: id.trim() },
+				{
+					$set: {
+						name,
+						phone,
+						email,
+					},
+				},
+				{ new: true } // important feature
+			)
+				.then(() => {
+					res.redirect("/contacts");
+				})
+				.catch((err) => {
+					console.log(err);
+					res.json(`Main error: ${err}`);
+				});
+		} else {
+			let contact = new Contact({
 				name,
 				phone,
 				email,
-			},
-		},
-		{new: true} // important feature
-	)
-		.then((updatedItem) => {
-			res.json(updatedItem);
-		})
-		.catch((err) => {
-			res.json(err);
-		});
+			});
+			contact
+				.save()
+				.then(() => {
+					Contact.find()
+						.then((contacts) => {
+							res.render("index", { contacts, error: {} });
+						})
+						.catch((err) => {
+							res.json(err);
+						});
+				})
+				.catch((err) => {
+					res.json(err);
+				});
+		}
+	}
 };
 
-exports.patchContact = (req, res) => {
+exports.deleteContact = (req, res) => {
 	let { id } = req.params;
 	Contact.findByIdAndDelete(id)
-		.then((deletedContact) => {
-			res.json(deletedContact);
+		.then(() => {
+			res.redirect("/contacts");
 		})
 		.catch((err) => {
 			res.json(err);
