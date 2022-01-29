@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url("../images/bg.jpg");
+  background-image: linear-gradient(rgba(128, 128, 128, 0.342), rgba(128, 128, 128, 0.329)), url("../images/bg.jpg");
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;

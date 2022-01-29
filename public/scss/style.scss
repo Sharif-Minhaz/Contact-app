@@ -7,43 +7,44 @@ $tr-color: rgba(66, 120, 238, 0.445);
 $border-color: rgb(89, 89, 248);
 
 body {
-	background-image: url("../images/bg.jpg");
+	background-image: linear-gradient(rgba(128, 128, 128, 0.342), rgba(128, 128, 128, 0.329)), url("../images/bg.jpg");
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: bottom;
+    // background-blend-mode: saturation;
 	main {
 		background-color: $bg-color;
 		height: 100vh;
-        .whole-container {
-            display: flex;
-            gap: 30px;
-            height: 100vh;
-            flex-flow: column wrap;
-            place-content: center;
-            place-items: center;
-            color: $dark-color;
-            h1 {
-                font-size: 160px;
-            }
-            button {
-                padding: 15px 25px;
-                background-color: $tr-color;
-                border: 2px solid $border-color;
-                border-radius: 50px;
-                cursor: pointer;
-                color: $dark-color;
-                font-size: 30px;
-                transition: 0.3s all;
-                &:hover {
-                    background-color: $border-color;
-                }
-            }
-        }
-        h4 {
-            color: $dark-color;
-            padding-bottom: 9px;
-        }
+		.whole-container {
+			display: flex;
+			gap: 30px;
+			height: 100vh;
+			flex-flow: column wrap;
+			place-content: center;
+			place-items: center;
+			color: $dark-color;
+			h1 {
+				font-size: 160px;
+			}
+			button {
+				padding: 15px 25px;
+				background-color: $tr-color;
+				border: 2px solid $border-color;
+				border-radius: 50px;
+				cursor: pointer;
+				color: $dark-color;
+				font-size: 30px;
+				transition: 0.3s all;
+				&:hover {
+					background-color: $border-color;
+				}
+			}
+		}
+		h4 {
+			color: $dark-color;
+			padding-bottom: 9px;
+		}
 		.container {
 			.form-inline {
 				display: flex !important;
@@ -53,9 +54,9 @@ body {
 		.form-container {
 			table {
 				color: $def-color;
-                th {
-                    color: $dark-color;
-                }
+				th {
+					color: $dark-color;
+				}
 			}
 			.table-striped {
 				> tbody {
