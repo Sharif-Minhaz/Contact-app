@@ -10,8 +10,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(userRoute);
-const { PORT, URI_CONNECTION_STRING } = process.env;
-
+const { DB_ADMIN, DB_PASSWORD } = process.env;
+const PORT = process.env.PORT || 8080;
 // home route
 app.get("/", (req, res) => {
 	res.render("home",{title: "Home"})
@@ -27,12 +27,15 @@ app.use((req, res, err) => {
 
 // listening port
 mongoose
-	.connect(URI_CONNECTION_STRING, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	})
+	.connect(
+		`mongodb+srv://${DB_ADMIN}:${DB_PASSWORD}@cluster0.h9bja.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
+	)
 	.then(() => {
-		app.listen(PORT || 3000, () => {
+		app.listen(PORT, () => {
 			console.log(`Server running at http://localhost:${PORT}`);
 		});
 	})
