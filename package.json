@@ -1,23 +1,25 @@
 {
-  "name": "dive_into_node.js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "prod": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "sharif md. minhaz",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^14.3.2",
-    "ejs": "^3.1.6",
-    "express": "^4.17.2",
-    "mongoose": "^6.1.8"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  }
+	"name": "dive_into_node.js",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"dev": "nodemon app.js"
+	},
+	"keywords": [],
+	"author": "sharif md. minhaz",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^14.3.2",
+		"ejs": "^3.1.6",
+		"express": "^4.17.2",
+		"mongoose": "^6.1.8"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	},
+	"engines": {
+		"node": "14.17.0"
+	}
 }
