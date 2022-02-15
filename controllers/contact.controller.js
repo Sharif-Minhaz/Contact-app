@@ -1,4 +1,4 @@
-const Contact = require("../models/contacts");
+const Contact = require("../models/Contacts");
 
 exports.showContact = (req, res) => {
 	Contact.find()
